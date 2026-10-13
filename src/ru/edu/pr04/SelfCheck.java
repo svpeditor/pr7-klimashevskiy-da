@@ -187,8 +187,9 @@ public class SelfCheck {
             }
             Product product = new Product(parts[0], parts[1], Double.parseDouble(parts[2]));
             order.addProduct(product, Integer.parseInt(parts[3]));
+        } catch (NumberFormatException e) {
+            System.out.println("Строка " + lineNumber + " пропущена: цена или количество не число");
         } catch (IllegalArgumentException | IllegalStateException e) {
-            // NumberFormatException тоже наследник IllegalArgumentException
             System.out.println("Строка " + lineNumber + " пропущена: " + e.getMessage());
         }
     }
