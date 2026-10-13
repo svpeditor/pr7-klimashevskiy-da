@@ -14,6 +14,7 @@ public class SelfCheck {
         checkOrderItem();
         checkOrder();
         checkConfirm();
+        checkVariant();
         System.out.println("Unit: " + passed + "/" + count + " passed");
         // можно передать свой файл: java -cp out ru.edu.pr04.SelfCheck data/my.csv
         runFile(args.length > 0 ? args[0] : "data/sample.csv");
@@ -81,6 +82,19 @@ public class SelfCheck {
         check("add after confirm", throwsOnAdd(order, new Product("P1", "Mouse", 1000), 1));
         check("remove after confirm", throwsOnRemove(order, "K01"));
         check("confirm twice", throwsOnConfirm(service, order));
+    }
+
+    private static void checkVariant() {
+        Product cable = new Product("C01", "Cable", 990);
+        // вариант 4: 25 - последнее допустимое количество, 26 уже ошибка
+        check("variant 25", new OrderItem(cable, 25).getQuantity() == 25);
+        check("variant 26", throwsIae(cable, 26));
+        // при объединении повтора лимит тоже действует: 20 + 5 можно, еще +1 нельзя
+        Order order = newOrder();
+        order.addProduct(cable, 20);
+        order.addProduct(cable, 5);
+        check("variant merge to 25", order.getItems().get(0).getQuantity() == 25);
+        check("variant merge to 26", throwsOnAdd(order, cable, 1));
     }
 
     // ---------- вспомогательные методы ----------

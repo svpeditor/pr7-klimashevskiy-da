@@ -3,3 +3,8 @@ M01;Monitor 27;32990;2
 K01;Keyboard;4490;3
 M01;Monitor 27;32990;1
 X01;Broken;-100;1
+C01;Cable;990;25
+C02;Cable 2m;1290;26
+K01;Keyboard;4490;23
+H01;Headset;abc;1
+;No id;500;1

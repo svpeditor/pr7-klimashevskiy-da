@@ -1,7 +1,8 @@
 package ru.edu.pr04;
 
 public class OrderItem {
-    public static final int MAX_QUANTITY = 100;
+    // вариант 4: максимальное количество в одной позиции 25 (было 100)
+    public static final int MAX_QUANTITY = 25;
 
     private final Product product;
     private int quantity;
